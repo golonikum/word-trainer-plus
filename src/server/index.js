@@ -72,7 +72,7 @@ app.get("*", (req, res, next) => {
 	<html lang="">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-		<title>React-Passport-Redux-Example</title>
+		<title>Word Trainer Plus</title>
 		<style>
 			body {
 				font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;			
