@@ -65,7 +65,7 @@ export function manualLogin(
 		return makeUserRequest("post", data, "/login")	
 			.then(response => {
 				if (response.data.success) {					
-					dispatch(loginSuccess(data))
+					dispatch(loginSuccess(response.data))
 					// use browserHistory singleton to control navigation. Will generate a 
 					// state change for time-traveling as we are using the react-router-redux package
 					browserHistory.push(successPath)
@@ -80,7 +80,7 @@ export function manualLogin(
 			      // Something happened in setting up the request that triggered an Error
 			      console.log('Error', response.message);
 			    }
-		    })					
+		    });
 	}
 }
 

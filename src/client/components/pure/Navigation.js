@@ -22,7 +22,7 @@ const Navigation = React.createClass({
 			<div style={navStyle}>				
 				{
 					this.props.user.authenticated 
-					? <button onClick={this._logout} style={buttonStyle}>Logout [{this.props.user.name}]</button>
+					? <button onClick={this._logout} style={buttonStyle}>Logout [{this.props.user.name || this.props.user.email}]</button>
 					: <Link to="/login">Log In</Link>
 				}				
 				{

@@ -21,19 +21,19 @@ exports.login = function(req, res, next) {
 		// Passport exposes a login() function on req (also aliased as logIn())
 		// that can be used to establish a login session		
 		req.logIn(user, loginErr => {
-			if(loginErr) {
+			if (loginErr) {
 				return res.json({ success: false, message: loginErr })
 			}
-			return res.json({ success: true, message: "authentication succeeded", name: user.name })
+			return res.json({ success: true, message: "authentication succeeded", name: user.name, role: user.role, email: user.email });
 		})
-	})(req, res, next)
+	})(req, res, next);
 }
 
 // -------------------------------------------
 
 exports.logout = function(req, res, next) {
 	// the logout method is added to the request object automatically by Passport
-	req.logout()
+	req.logout();
 	return res.json({ success: true })
 }
 
