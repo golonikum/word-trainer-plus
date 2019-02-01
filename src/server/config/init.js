@@ -4,7 +4,7 @@ export default function() {
     User.findOne({ role: 'admin' }, (err, user) => {
         if (!user) {
             const u = {
-                email: 'goloniko@gmail.com',
+                email: process.env.ADMIN_EMAIL || 'admin@golonikum.com',
                 name: 'admin',
                 password: process.env.ADMIN_PASSWORD || '123456',
                 role: 'admin',
@@ -13,7 +13,7 @@ export default function() {
                 if (err) {
                     console.error(err);
                 } else {
-                    console.log('Admin created in MongoDB.');
+                    console.log('Admin successfully created in MongoDB.');
                 }
             });
         }
