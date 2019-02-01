@@ -9,6 +9,7 @@
     "build:umd:min": "webpack --config webpack/webpack.config.prod.js",
     "build": "npm run clean && npm run build:lib && npm run build:umd && npm run build:umd:min",
     "postinstall": "npm run build",
+    "heroku-postbuild": "npm run postinstall",
     "clean": "rimraf lib public/assets",
     "server": "better-npm-run server",
     "server:dev": "better-npm-run server:dev",
