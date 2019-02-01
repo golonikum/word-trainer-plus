@@ -12,7 +12,6 @@ import "./models/user"
 
 // -------------------------------------------
 
-const port = process.env.PORT || 5000;
 const app = express()
 
 // -------------------------------------------
@@ -89,6 +88,7 @@ app.get("*", (req, res, next) => {
 
 })
 
+const port = app.get("port");
 // start listening to incoming requests
 app.listen(port, (err) => {
 	if (err) {

@@ -8,7 +8,7 @@ import secrets from "./secrets"
 const MongoStore = connectMongo(session)
 
 export default function(app, passport) {
-	app.set("port", 3000)
+	app.set("port", process.env.PORT || 5000)
 	app.set("host", "localhost")
 
 	// X-Powered-By header has no functional value.
