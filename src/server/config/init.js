@@ -13,7 +13,7 @@ export default function() {
                 if (err) {
                     console.error(err);
                 } else {
-                    console('Admin created in MongoDB.');
+                    console.log('Admin created in MongoDB.');
                 }
             });
         }
