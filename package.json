@@ -67,8 +67,6 @@
     "react-router-redux": "4.0.0",
     "redux": "3.3.1",
     "redux-thunk": "2.0.1"
-  },
-  "devDependencies": {
     "babel-cli": "^6.6.5",
     "babel-core": "6.7.2",
     "babel-loader": "6.2.4",
