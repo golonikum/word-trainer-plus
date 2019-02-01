@@ -1,76 +1,77 @@
-import fs from "fs"
-import express from "express"
-import mongoose from "mongoose"
-import passport from "passport"
-import webpack from "webpack" 
-import config from "../../webpack/webpack.config.dev.js"
-import secrets from "./config/secrets" 
-import configurePassport from "./config/passport"
-import configureExpress from "./config/express"
-import users from "./controllers/users"
-import "./models/user"
+import fs from 'fs';
+import express from 'express';
+import mongoose from 'mongoose';
+import passport from 'passport';
+import webpack from 'webpack';
+import config from '../../webpack/webpack.config.dev.js';
+import secrets from './config/secrets';
+import configurePassport from './config/passport';
+import configureExpress from './config/express';
+import configureDB from './config/init';
+import users from './controllers/users';
+import './models/user';
 
 // -------------------------------------------
 
-const app = express()
+const app = express();
 
 // -------------------------------------------
 
 const connect = () => {
 	mongoose.connect(secrets.db, (err, res) => {
 		if (err) {
-			console.log(`Error connecting to ${secrets.db}. ${err}`)
+			console.log(`Error connecting to ${secrets.db}. ${err}`);
 		} else {
-			console.log(`Successfully connected to ${secrets.db}.`)
+			console.log(`Successfully connected to ${secrets.db}.`);
 		}
-	})
+	});
 }
-connect()
+connect();
 
-mongoose.connection.on("error", console.error)
-mongoose.connection.on("disconnected", connect)
+mongoose.connection.on('error', console.error);
+mongoose.connection.on('disconnected', connect);
 
 // -------------------------------------------
 
-const isDev = process.env.NODE_ENV === "development"
+const isDev = process.env.NODE_ENV === 'development';
 
 // if in development mode set up the middleware required for hot reloading and rebundling
-if(isDev) {
+if (isDev) {
 
 	const compiler = webpack(config)
 
-	app.use(require("webpack-dev-middleware")(compiler, {
+	app.use(require('webpack-dev-middleware')(compiler, {
 		noInfo: true,
 		publicPath: config.output.publicPath
-	}))
+	}));
 
-	app.use(require("webpack-hot-middleware")(compiler))
+	app.use(require('webpack-hot-middleware')(compiler));
 }
 
 
 // -------------------------------------------
 
-configurePassport(app, passport)
-configureExpress(app, passport)
+configurePassport(app, passport);
+configureExpress(app, passport);
+configureDB();
 
 // -------------------------------------------
 
-app.post("/login", users.login)
-app.get("/logout", users.logout)
-app.post("/register", users.register)
+app.post('/login', users.login);
+app.get('/logout', users.logout);
+app.post('/register', users.register);
 
-app.get("*", (req, res, next) => {	
-
-	// if we are in production mode then an extension will be provided, usually ".min"
-	const minified = process.env.MIN_EXT || ""
+app.get('*', (req, res, next) => {
+	// if we are in production mode then an extension will be provided, usually '.min'
+	const minified = process.env.MIN_EXT || '';
 
 	// this is the HTML we will send to the client when they request any page. React and React Router
 	// will take over once the scripts are loaded client-side
 	const appHTML = 
 	`<!doctype html>
-	<html lang="">
+	<html lang=''>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta http-equiv='Content-Type' content='text/html;charset=utf-8' />
 		<title>Word Trainer Plus</title>
 		<style>
 			body {
@@ -79,21 +80,20 @@ app.get("*", (req, res, next) => {
 		</style>
 	</head>
 	<body>
-		<div id="app"></div>
-		<script src="/assets/app${minified}.js"></script>
+		<div id='app'></div>
+		<script src='/assets/app${minified}.js'></script>
 	</body>
-	</html>`
+	</html>`;
 
-	res.status(200).end(appHTML)
+	res.status(200).end(appHTML);
+});
 
-})
-
-const port = app.get("port");
+const port = app.get('port');
 // start listening to incoming requests
 app.listen(port, (err) => {
 	if (err) {
-		console.err(err.stack)
+		console.err(err.stack);
 	} else {
-		console.log(`App listening on port ${port} [${process.env.NODE_ENV} mode]`)
+		console.log(`App listening on port ${port} [${process.env.NODE_ENV} mode]`);
 	}
-})
+});

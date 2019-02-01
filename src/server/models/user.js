@@ -1,8 +1,8 @@
 // Defining a User Model in mongoose
 // Code modified from https://github.com/sahat/hackathon-starter
-import bcrypt from "bcrypt-nodejs"
-import mongoose from "mongoose"
-import crypto from "crypto"
+import bcrypt from "bcrypt-nodejs";
+import mongoose from "mongoose";
+import crypto from "crypto";
 
 const UserSchema = new mongoose.Schema({
 	email: { 
@@ -11,8 +11,9 @@ const UserSchema = new mongoose.Schema({
 		lowercase: true
 	},
 	name: String,
-	password: String	
-})
+	password: String,
+	role: String,
+});
 
 /**
  * Password hash middleware.

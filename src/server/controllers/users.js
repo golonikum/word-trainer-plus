@@ -49,6 +49,7 @@ exports.register = function(req, res, next) {
 		}
 		// go ahead and create the new user
 		else {
+			req.body.role = 'user';
 			User.create(req.body, (err) => {
 				if (err) {
 					console.error(err)
