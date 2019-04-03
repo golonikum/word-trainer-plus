@@ -22,7 +22,7 @@ const user = (state = {
 		case MANUAL_LOGIN_USER:
 			return Object.assign({}, state, { isWaiting: true })
 		case LOGIN_SUCCESS_USER:
-			return Object.assign({}, state, { isWaiting: false, authenticated: true, email: action.data.email, name: action.data.name })
+			return Object.assign({}, state, { isWaiting: false, authenticated: true, email: action.data.email, name: action.data.name, role: action.data.role })
 		case LOGIN_ERROR_USER:
 			return Object.assign({}, state, { isWaiting: false, authenticated: false })
 		case SIGNUP_USER:
