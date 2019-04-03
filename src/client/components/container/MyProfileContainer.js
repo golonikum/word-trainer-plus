@@ -2,7 +2,9 @@ import { connect } from "react-redux"
 import MyProfile from "../pure/MyProfile"
 
 const mapStateToProps = (state) => {
-	return {}
+	return {
+		user: state.user
+	}
 }
 
 export default connect(

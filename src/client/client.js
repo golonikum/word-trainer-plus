@@ -30,5 +30,6 @@ const routes = createRoutes(store, history)
 render(
 	<Provider store={store}>
 		{routes}
-	</Provider>
-	, document.getElementById("app"))
+	</Provider>, 
+	document.getElementById("app")
+)

@@ -30,10 +30,13 @@ const Navigation = React.createClass({
 					? <span>&nbsp;|&nbsp;<Link to="/register">Register</Link></span>
 					: ""
 				}				
-				&nbsp;|&nbsp;
-				<Link to="/myprofile">MyProfile</Link>
+				{
+					this.props.user.authenticated 
+					? <span>&nbsp;|&nbsp;<Link to="/myprofile">MyProfile</Link></span>
+					: ""
+				}
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<Link to="/">About This Repo</Link>
+				<Link to="/">Home</Link>
 			</div>
 		)	
 	}
