@@ -26,15 +26,15 @@ npm run start:dev
 npm run build
 ```
 
-## Technologies
+## Used technologies
 
-React for the view layer
-Bootstrap (with react-bootstrap) for front-end
-PassportJS for authentication (using a Local Strategy)
-Redux to handle our state
-React Router for routing client-side
-Node.js with Express for handling server requests (REST and page requests)
-MongoDB for our database, with Mongoose handling our schema
-Webpack to bundle our client-side code (hot reloading using webpack-dev-middleware and webpack-hot-middleware)
-Heroku as hosting service
-Git as VCS
+- **React** for the view layer
+- **Bootstrap** (with **react-bootstrap**) for front-end
+- **PassportJS** for authentication (using a Local Strategy)
+- **Redux** to handle our state
+- **React Router** for routing client-side
+- **Node.js** with **Express** for handling server requests (REST and page requests)
+- **MongoDB** for our database, with **Mongoose** handling our schema
+- **Webpack** to bundle our client-side code (hot reloading using **webpack-dev-middleware** and **webpack-hot-middleware**)
+- **Heroku** as hosting service
+- **Git** as VCS
