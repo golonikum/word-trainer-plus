@@ -1,6 +1,8 @@
 # Word Trainer Plus
 
-Demonstration of PassportJS authentication in React w/ Redux.
+Application allows you to store foreign words and expressions, and also it helps to remember them by doing excercises.
+
+## Setup and run
 
 ### Installation
 First install [node.js](http://nodejs.org/) and [mongodb](https://www.mongodb.org/downloads). Then:
@@ -24,16 +26,15 @@ npm run start:dev
 npm run build
 ```
 
-This repo demonstrates:
+## Technologies
 
-Main
-* [`React`](https://github.com/facebook/react) for the view layer
-* [`PassportJS`](https://github.com/jaredhanson/passport) for authentication (using a Local Strategy)
-* [`Redux`](https://github.com/reactjs/redux) to handle our state
-
-Secondary
-* [`React Router`](https://github.com/reactjs/react-router) for routing client-side
-* [`Express`](https://github.com/expressjs/express) for handling server requests (REST and page requests)
-* [`MongoDB`](https://github.com/mongodb/mongo) for our database, with [`Mongoose`](https://github.com/Automattic/mongoose) handling our schema
-* [`Webpack`](https://github.com/webpack) to bundle our client-side code
-* Hot reloading using [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware) and [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware)
+React for the view layer
+Bootstrap (with react-bootstrap) for front-end
+PassportJS for authentication (using a Local Strategy)
+Redux to handle our state
+React Router for routing client-side
+Node.js with Express for handling server requests (REST and page requests)
+MongoDB for our database, with Mongoose handling our schema
+Webpack to bundle our client-side code (hot reloading using webpack-dev-middleware and webpack-hot-middleware)
+Heroku as hosting service
+Git as VCS
