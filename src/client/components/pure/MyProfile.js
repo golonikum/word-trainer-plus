@@ -1,7 +1,7 @@
 import React from "react"
 
 const MyProfile = ({ user }) =>
-	<div>
+	<div className="container-fluid">
 		<h2>My Profile</h2>
 		<p>Hi, {user.name}!</p>
 		<p>You are {user.role === 'admin' ? 'an administrator' : 'a simple user'}.</p>

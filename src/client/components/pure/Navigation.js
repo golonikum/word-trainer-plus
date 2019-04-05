@@ -1,32 +1,39 @@
-import React from "react"
-import { NavLink } from "react-router-dom"
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
+import React from 'react';
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap';
 
 const Navigation = ({ user, manualLogout }) =>
 	<Navbar bg="light" expand="lg">
-		<Navbar.Brand href="/">Word Trainer Plus</Navbar.Brand>
 		<Navbar.Toggle aria-controls="basic-navbar-nav" />
 		<Navbar.Collapse id="basic-navbar-nav">
-			<Nav className="mr-auto">
-				<NavLink to="/">Home</NavLink>
-				{
-					user.authenticated 
-					? <Button variant="primary" onClick={(e) => {
-						event.preventDefault()
-						manualLogout()
-					}}>Logout [{user.name || user.email}]</Button>
-					: <NavLink to="/login">Log In</NavLink>
-				}
-				{
-					!user.authenticated 
-					? <NavLink to="/register">Register</NavLink>
-					: <NavLink to="/myprofile">MyProfile</NavLink>
-				}
-			</Nav>
-			<Form inline>
+			<div className="container-fluid">
+				<Nav className="row">				
+					<div className="col-auto mr-auto">
+						<IndexLinkContainer to="/"><Nav.Link>Home</Nav.Link></IndexLinkContainer>
+					</div>
+					<div className="col-auto">
+						{
+							!user.authenticated 
+							? <LinkContainer to="/register"><Nav.Link>Register</Nav.Link></LinkContainer>
+							: <LinkContainer to="/myprofile"><Nav.Link>MyProfile</Nav.Link></LinkContainer>
+						}
+					</div>
+					<div className="col-auto">
+						{
+							user.authenticated 
+							? <Button variant="primary" onClick={(e) => {
+								event.preventDefault()
+								manualLogout()
+							}}>Logout [{user.name || user.email}]</Button>
+							: <LinkContainer to="/login"><Nav.Link>Log In</Nav.Link></LinkContainer>
+						}
+					</div>
+				</Nav>
+			</div>
+			{/* <Form inline>
 				<FormControl type="text" placeholder="Search" className="mr-sm-2" />
 				<Button variant="outline-success">Search</Button>
-			</Form>
+			</Form> */}
 		</Navbar.Collapse>
 	</Navbar>
 

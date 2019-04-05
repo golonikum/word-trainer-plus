@@ -1,7 +1,7 @@
 import React from "react"
 
 const Default = ({}) =>
-	<div>
+	<div className="container-fluid">
 		<h2>Word Trainer Plus</h2>				
 		<p>Demonstration of PassportJS authentication in React w/ Redux. Use the links above to register a new user and login/logout. You will only be able to view the MyProfile page when you are logged in. Logging in will redirect you to MyProfile if you had clicked that link beforehand.</p>
 		<p>I'll be doing my best to document code with useful comments so look for more detail there. Note: you should be able to implement the authentication functionality using less packages. I was working on another project before deciding to make this example repo so some bloat may have travelled over from that.</p>
