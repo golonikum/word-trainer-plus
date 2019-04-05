@@ -2,7 +2,6 @@
 // Code modified from https://github.com/sahat/hackathon-starter
 import bcrypt from "bcrypt-nodejs";
 import mongoose from "mongoose";
-import crypto from "crypto";
 
 const UserSchema = new mongoose.Schema({
 	email: { 
