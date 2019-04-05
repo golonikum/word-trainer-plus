@@ -75,7 +75,7 @@
     "webpack-cli": "3.3.0",
     "webpack-dev-middleware": "3.6.2",
     "jquery": "3.3.1",
-    "react-router": "^4.3.1"
+    "react-router": "5.0.0"
   },
   "author": "Nikita Golov",
   "license": "MIT",
