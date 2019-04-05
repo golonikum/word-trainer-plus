@@ -1,45 +1,33 @@
 import React from "react"
-import { Link } from "react-router"
+import { NavLink } from "react-router-dom"
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
 
-var navStyle = {
-	backgroundColor: "#EEE",
-	padding: "10px"
-}
-
-var buttonStyle = {
-	backgroundColor: "yellow"
-}
-
-const Navigation = React.createClass({
-
-	_logout: function(event) {
-		event.preventDefault()
-		this.props.manualLogout()
-	},
-
-	render: function() {
-		return(
-			<div style={navStyle}>				
+const Navigation = ({ user, manualLogout }) =>
+	<Navbar bg="light" expand="lg">
+		<Navbar.Brand href="/">Word Trainer Plus</Navbar.Brand>
+		<Navbar.Toggle aria-controls="basic-navbar-nav" />
+		<Navbar.Collapse id="basic-navbar-nav">
+			<Nav className="mr-auto">
+				<NavLink to="/">Home</NavLink>
 				{
-					this.props.user.authenticated 
-					? <button onClick={this._logout} style={buttonStyle}>Logout [{this.props.user.name || this.props.user.email}]</button>
-					: <Link to="/login">Log In</Link>
-				}				
-				{
-					!this.props.user.authenticated 
-					? <span>&nbsp;|&nbsp;<Link to="/register">Register</Link></span>
-					: ""
-				}				
-				{
-					this.props.user.authenticated 
-					? <span>&nbsp;|&nbsp;<Link to="/myprofile">MyProfile</Link></span>
-					: ""
+					user.authenticated 
+					? <Button variant="primary" onClick={(e) => {
+						event.preventDefault()
+						manualLogout()
+					}}>Logout [{user.name || user.email}]</Button>
+					: <NavLink to="/login">Log In</NavLink>
 				}
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<Link to="/">Home</Link>
-			</div>
-		)	
-	}
-})
+				{
+					!user.authenticated 
+					? <NavLink to="/register">Register</NavLink>
+					: <NavLink to="/myprofile">MyProfile</NavLink>
+				}
+			</Nav>
+			<Form inline>
+				<FormControl type="text" placeholder="Search" className="mr-sm-2" />
+				<Button variant="outline-success">Search</Button>
+			</Form>
+		</Navbar.Collapse>
+	</Navbar>
 
 export default Navigation

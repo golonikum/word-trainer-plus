@@ -1,22 +1,19 @@
 import React, { PropTypes } from "react"
 import ReactDOM from "react-dom"
-import axios from "axios"
 
 // ----------------------------------------------------
-const loginMessageStyle = {
-	color: "red"
-}
+class Login extends React.Component {
 
-// ----------------------------------------------------
-const Login = React.createClass({
+	state = {
+		loginMessage: ""
+	}
 
-	getInitialState: function() {
-		return {
-			loginMessage: ""
-		}
-	},
+	constructor(props) {
+		super(props)
+		this.submit = this.submit.bind(this)
+	}
 
-	_onLoginSubmit: function(event) {		
+	submit(event) {
 		event.preventDefault()
 		const email = ReactDOM.findDOMNode(this.refs.email).value
 		const password = ReactDOM.findDOMNode(this.refs.password).value
@@ -34,21 +31,20 @@ const Login = React.createClass({
 				})			
 			}	
 		})
+	}
 
-	},
-
-	render: function() {
+	render() {
 		return(
 			<div>
 				<h2>Log in</h2>		
-				<form onSubmit={this._onLoginSubmit}>
+				<form onSubmit={this.submit}>
 					<input type="email" ref="email" placeholder="Email"/><br/>
 					<input ref="password" type="password" placeholder="Password" /><br/>
-					<input type="submit" value="Login" /> <span style={loginMessageStyle}>{ this.state.loginMessage }</span>
+					<input type="submit" value="Login" /> <span>{ this.state.loginMessage }</span>
 				</form>	
 			</div>	
 		)
 	}
-})
+}
 
 export default Login

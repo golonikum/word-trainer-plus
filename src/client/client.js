@@ -1,35 +1,55 @@
 import React from "react"
 import { render } from "react-dom"
 import { Provider } from "react-redux"
-import { Router, browserHistory } from "react-router"
-import { syncHistoryWithStore } from "react-router-redux"
-import { applyMiddleware, createStore } from "redux"
-import thunkMiddleware from "redux-thunk"
-import createLogger from "redux-logger"
-import { syncHistory } from "react-router-redux"
-import isNode from "detect-node"
-import createRoutes from "./routes"
-import rootReducer from "./reducers"
+import { ConnectedRouter } from 'connected-react-router'
+import configureStore, { history } from './configureStore'
+import { Route, Switch, Redirect } from "react-router-dom";
+import LoginContainer from "./components/container/LoginContainer";
+import RegisterContainer from "./components/container/RegisterContainer";
+import MyProfileContainer from "./components/container/MyProfileContainer";
+import Default from "./components/pure/Default";
+import NavigationContainer from "./components/container/NavigationContainer";
+import Whoops404 from './components/Whoops404';
 
-let middleware = [		
-	thunkMiddleware
-]	
+const store = configureStore(/* provide initial state if any */)
 
-// only add Redux-Logger on the client-side because it causes problems server-side.
-if (!isNode) {
-	middleware.push(createLogger())
+function PrivateRoute({ component: Component, authed, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        authed === true ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: props.location }
+            }}
+          />
+        )
+      }
+    />
+  );
 }
-
-const finalCreateStore = applyMiddleware(...middleware)(createStore)
-const store = finalCreateStore(rootReducer)	
-
-// Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(browserHistory, store)
-const routes = createRoutes(store, history)
 
 render(
 	<Provider store={store}>
-		{routes}
+		<ConnectedRouter history={history}>
+			<Route path="/"
+				component={() => (
+					<div className="app">
+						<Route component={NavigationContainer} />
+						<Switch>
+							<Route exact path="/" component={Default} />
+							<Route path="/login" component={LoginContainer} />
+							<Route path="/register" component={RegisterContainer} />
+							<PrivateRoute authed={store.getState().user.authenticated} path="/myprofile" component={MyProfileContainer} />
+							<Route component={Whoops404} />
+						</Switch>
+					</div>
+				)} />
+		</ConnectedRouter>
 	</Provider>, 
 	document.getElementById("app")
 )

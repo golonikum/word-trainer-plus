@@ -7,15 +7,18 @@ const registerMessageStyle = {
 }
 
 // ----------------------------------------------------
-const Register = React.createClass({
+class Register extends React.Component{
 
-	getInitialState: function() {
-		return {
-			registerMessage: ""
-		}
-	},
+	state = {
+		registerMessage: ""
+	}
 
-	_onRegisterSubmit: function(event) {
+	constructor(props) {
+		super(props)
+		this.submit = this.submit.bind(this)
+	}
+
+	submit(event) {
 		event.preventDefault()
 		const email = ReactDOM.findDOMNode(this.refs.email).value
 		const name = ReactDOM.findDOMNode(this.refs.name).value
@@ -35,14 +38,13 @@ const Register = React.createClass({
 				})			
 			}	
 		})		
+	}
 
-	},
-
-	render: function() {
+	render() {
 		return(
 			<div>
 				<h2>Register</h2>	
-				<form onSubmit={this._onRegisterSubmit}>		
+				<form onSubmit={this.submit}>		
 					<input type="email" ref="email" placeholder="Email"/><br/>
 					<input type="text" ref="name" placeholder="Name"/><br/>
 					<input type="password" ref="password" placeholder="Password"/><br/>					
@@ -51,6 +53,6 @@ const Register = React.createClass({
 			</div>
 		)	
 	}
-})
+}
 
 export default Register

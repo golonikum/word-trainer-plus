@@ -1,6 +1,7 @@
 import axios from "axios"
-import { browserHistory } from "react-router"
+// import { browserHistory } from "react-router"
 import * as types from "../constants"
+import { history } from '../configureStore'
 
 // "Log In" action creators
 function beginLogin() {
@@ -68,7 +69,7 @@ export function manualLogin(
 					dispatch(loginSuccess(response.data))
 					// use browserHistory singleton to control navigation. Will generate a 
 					// state change for time-traveling as we are using the react-router-redux package
-					browserHistory.push(successPath)
+					history.push('/myprofile')
 				} else {					
 					dispatch(loginError())
 					let loginMessage = response.data.message
@@ -96,7 +97,7 @@ export function manualLogout() {
 					dispatch(logoutSuccess())
 					// use browserHistory singleton to control navigation. Will generate a 
 					// state change for time-traveling as we are using the react-router-redux package
-					browserHistory.push("/") // logout to home page
+					history.push('/') // logout to home page
 				} else {
 					dispatch(logoutError())
 				}
@@ -120,6 +121,7 @@ export function manualRegister(data) {
 				if (response.data.success) {					
 					dispatch(registerSuccess())
 					dispatch(manualLogin(data, "/"))
+					history.push('/myprofile')
 				} else {					
 					dispatch(registerError())
 					let registerMessage = response.data.message

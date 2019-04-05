@@ -1,17 +1,15 @@
-import fs from 'fs';
 import express from 'express';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import webpack from 'webpack';
-import config from '../../webpack/webpack.config.dev.js';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackConfig from '../../webpack.config.js';
 import secrets from './config/secrets';
 import configurePassport from './config/passport';
 import configureExpress from './config/express';
 import configureDB from './config/init';
 import users from './controllers/users';
 import './models/user';
-
-// -------------------------------------------
 
 const app = express();
 
@@ -37,15 +35,7 @@ const isDev = process.env.NODE_ENV === 'development';
 
 // if in development mode set up the middleware required for hot reloading and rebundling
 if (isDev) {
-
-	const compiler = webpack(config)
-
-	app.use(require('webpack-dev-middleware')(compiler, {
-		noInfo: true,
-		publicPath: config.output.publicPath
-	}));
-
-	app.use(require('webpack-hot-middleware')(compiler));
+	app.use(webpackMiddleware(webpack(webpackConfig(process.env))));
 }
 
 
@@ -61,34 +51,33 @@ app.post('/login', users.login);
 app.get('/logout', users.logout);
 app.post('/register', users.register);
 
-app.get('*', (req, res, next) => {
-	// if we are in production mode then an extension will be provided, usually '.min'
-	const minified = process.env.MIN_EXT || '';
+const respond = ({url}, res) => {
+	const appHTML =`
+<!DOCTYPE html>
+<html lang=''>
+<head>
+	<meta http-equiv='Content-Type' content='text/html;charset=utf-8' />
+	<title>Word Trainer Plus</title>
+	<link
+		rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		crossorigin="anonymous"
+	/>
+</head>
+<body>
+	<div id='app'></div>
+	<script src='/bundle.js'></script>
+</body>
+</html>
+`;
+    res.status(200).send(appHTML)
+}
 
-	// this is the HTML we will send to the client when they request any page. React and React Router
-	// will take over once the scripts are loaded client-side
-	const appHTML = 
-	`<!doctype html>
-	<html lang=''>
-	<head>
-		<meta http-equiv='Content-Type' content='text/html;charset=utf-8' />
-		<title>Word Trainer Plus</title>
-		<style>
-			body {
-				font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;			
-			}
-		</style>
-	</head>
-	<body>
-		<div id='app'></div>
-		<script src='/assets/app${minified}.js'></script>
-	</body>
-	</html>`;
-
-	res.status(200).end(appHTML);
-});
+app.use(respond);
 
 const port = app.get('port');
+
 // start listening to incoming requests
 app.listen(port, (err) => {
 	if (err) {

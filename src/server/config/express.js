@@ -18,7 +18,7 @@ export default function(app, passport) {
 
 	app.use(bodyParser.json())
 	app.use(bodyParser.urlencoded({ extended: true }))
-	app.use(express.static(path.join(process.cwd(), 'public')));
+	app.use(express.static(path.join(process.cwd(), 'public/assets')));
 
 	const sess = {
 		resave: true,
