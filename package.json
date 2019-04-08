@@ -2,7 +2,7 @@
   "name": "word-trainer-plus",
   "version": "1.0.0",
   "description": "Demonstration of PassportJS authentication in React w/ Redux.",
-  "main": "devStart.js",
+  "main": "src/server/index.js",
   "scripts": {
     "build:server": "babel src/server --out-dir lib/server",
     "build:ui": "webpack --progress",

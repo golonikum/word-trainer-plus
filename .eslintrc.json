@@ -1,0 +1,86 @@
+{
+    "extends": "airbnb-base",
+    "env": {
+        "browser": true
+    },
+    "globals": {
+        "Ext": true,
+        "RCOP": true,
+        "UiKit": true,
+        "ToolKit": true,
+        "_": true
+    },
+    "rules": {
+        "linebreak-style": 0,
+        "unicode-bom": 0,
+        "space-before-function-paren": [
+            "error",
+            "never"
+        ],
+        "indent": [
+            2,
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "no-console": 0,
+        "comma-dangle": [
+            "error",
+            {
+                "arrays": "always-multiline",
+                "exports": "always-multiline",
+                "functions": "never",
+                "imports": "always-multiline",
+                "objects": "always-multiline"
+            }
+        ],
+        "no-unused-vars": [2, {"vars": "all", "args": "none"}],
+        "no-param-reassign": 0,
+        "max-len": ["error", 150, 4, {
+          "ignoreUrls": true,
+          "ignoreComments": true,
+          "ignoreRegExpLiterals": true,
+          "ignoreStrings": true,
+          "ignoreTemplateLiterals": true
+        }],
+        "no-restricted-properties": [
+          "error", {
+            "object": "arguments",
+            "property": "callee",
+            "message": "arguments.callee is deprecated"
+          }, {
+            "object": "global",
+            "property": "isFinite",
+            "message": "Please use Number.isFinite instead"
+          }, {
+            "object": "self",
+            "property": "isFinite",
+            "message": "Please use Number.isFinite instead"
+          }, {
+            "object": "window",
+            "property": "isFinite",
+            "message": "Please use Number.isFinite instead"
+          }, {
+            "object": "global",
+            "property": "isNaN",
+            "message": "Please use Number.isNaN instead"
+          }, {
+            "object": "self",
+            "property": "isNaN",
+            "message": "Please use Number.isNaN instead"
+          }, {
+            "object": "window",
+            "property": "isNaN",
+            "message": "Please use Number.isNaN instead"
+          }, {
+            "property": "__defineGetter__",
+            "message": "Please use Object.defineProperty instead."
+          }, {
+            "property": "__defineSetter__",
+            "message": "Please use Object.defineProperty instead."
+          }
+        ],
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+    }
+}
