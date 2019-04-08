@@ -21,8 +21,8 @@ export default function(app, passport) {
 	app.use(express.static(path.join(process.cwd(), 'public/assets')));
 
 	const sess = {
-		resave: false,
-		saveUninitialized: false,
+		resave: true,
+		saveUninitialized: true,
 		secret: secrets.sessionSecret,
 		proxy: false,
 		name: "sessionId",
