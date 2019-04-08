@@ -35,7 +35,7 @@ class Login extends React.Component {
 
 	render() {
 		return(
-			<div>
+			<div className="container-fluid">
 				<h2>Log in</h2>		
 				<form onSubmit={this.submit}>
 					<input type="email" ref="email" placeholder="Email"/><br/>

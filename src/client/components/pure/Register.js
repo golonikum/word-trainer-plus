@@ -42,7 +42,7 @@ class Register extends React.Component{
 
 	render() {
 		return(
-			<div>
+			<div className="container-fluid">
 				<h2>Register</h2>	
 				<form onSubmit={this.submit}>		
 					<input type="email" ref="email" placeholder="Email"/><br/>
