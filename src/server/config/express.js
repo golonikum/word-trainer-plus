@@ -43,7 +43,9 @@ export default function(app, passport) {
 	if(node_env === 'production') {
 		console.log('===> 🚦  Note: In order for authentication to work in production');
 		console.log('===>           you will need a secure HTTPS connection');
-		sess.cookie.secure = true; // Serve secure cookies
+		// Serve secure cookies
+		sess.cookie.secure = true; 
+		sess.cookie.httpOnly = false;
 	}
 
 	app.use(session(sess))
