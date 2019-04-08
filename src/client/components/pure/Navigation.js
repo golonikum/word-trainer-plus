@@ -22,7 +22,7 @@ const Navigation = ({ user, manualLogout }) =>
 						{
 							user.authenticated 
 							? <Button variant="primary" onClick={(e) => {
-								event.preventDefault()
+								e.preventDefault()
 								manualLogout()
 							}}>Logout [{user.name || user.email}]</Button>
 							: <LinkContainer to="/login"><Nav.Link>Log In</Nav.Link></LinkContainer>

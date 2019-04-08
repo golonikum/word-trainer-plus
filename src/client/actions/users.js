@@ -1,57 +1,56 @@
-import axios from "axios"
-// import { browserHistory } from "react-router"
-import * as types from "../constants"
-import { history } from '../configureStore'
+import axios from 'axios';
+import * as types from '../constants';
+import { history } from '../configureStore';
 
-// "Log In" action creators
+// 'Log In' action creators
 function beginLogin() {
-	return { type: types.MANUAL_LOGIN_USER }
+	return { type: types.MANUAL_LOGIN_USER };
 }
 
 function loginSuccess(data) {
 	return { 
 		type: types.LOGIN_SUCCESS_USER,
 		data
-	}
+	};
 }
 
 function loginError() {
-	return { type: types.LOGIN_ERROR_USER }
+	return { type: types.LOGIN_ERROR_USER };
 }
 
-// "Log Out" action creators
+// 'Log Out' action creators
 function beginLogout() {
-	return { type: types.LOGOUT_USER }
+	return { type: types.LOGOUT_USER };
 }
 
 function logoutSuccess() {
-	return { type: types.LOGOUT_SUCCESS_USER }
+	return { type: types.LOGOUT_SUCCESS_USER };
 }
 
 function logoutError() {
-	return { type: types.LOGOUT_ERROR_USER }
+	return { type: types.LOGOUT_ERROR_USER };
 }
 
-// "Register" action creators
+// 'Register' action creators
 function beginRegister() {
-	return { type: types.REGISTER_USER }
+	return { type: types.REGISTER_USER };
 }
 
 function registerSuccess() {
-	return { type: types.REGISTER_SUCCESS_USER }
+	return { type: types.REGISTER_SUCCESS_USER };
 }
 
 function registerError() {
-	return { type: types.REGISTER_ERROR_USER }
+	return { type: types.REGISTER_ERROR_USER };
 }
 
-function makeUserRequest(method, data, api="/login") {
+function makeUserRequest(method, data, api='/login') {
 	// returns a Promise
 	return axios({
 		method: method,
 		url: api,
 		data: data
-	})
+	});
 }
 
 // Example of an Async Action Creator
@@ -61,19 +60,19 @@ export function manualLogin(
 		successPath // path to redirect to upon successful log in
 	) {	
 	return dispatch => {
-		dispatch(beginLogin())
+		dispatch(beginLogin());
 
-		return makeUserRequest("post", data, "/login")	
+		return makeUserRequest('post', data, '/login')	
 			.then(response => {
 				if (response.data.success) {					
-					dispatch(loginSuccess(response.data))
+					dispatch(loginSuccess(response.data));
 					// use browserHistory singleton to control navigation. Will generate a 
 					// state change for time-traveling as we are using the react-router-redux package
-					history.push('/myprofile')
+					history.push('/myprofile');
 				} else {					
-					dispatch(loginError())
-					let loginMessage = response.data.message
-					return loginMessage					
+					dispatch(loginError());
+					let loginMessage = response.data.message;
+					return loginMessage;
 				}
 			})
 			.catch(function (response) {
@@ -82,24 +81,24 @@ export function manualLogin(
 			      console.log('Error', response.message);
 			    }
 		    });
-	}
+	};
 }
 
 // Example of an Async Action Creator
 // http://redux.js.org/docs/advanced/AsyncActions.html
 export function manualLogout() {
 	return dispatch => {
-		dispatch(beginLogout())
+		dispatch(beginLogout());
 
-		return axios.get("/logout")
+		return axios.get('/logout')
 			.then(response => {
 				if (response.data.success) {
-					dispatch(logoutSuccess())
+					dispatch(logoutSuccess());
 					// use browserHistory singleton to control navigation. Will generate a 
 					// state change for time-traveling as we are using the react-router-redux package
-					history.push('/') // logout to home page
+					history.push('/'); // logout to home page
 				} else {
-					dispatch(logoutError())
+					dispatch(logoutError());
 				}
 			})
 			.catch(response => {
@@ -107,25 +106,25 @@ export function manualLogout() {
 			      // Something happened during logout that triggered an Error
 			      console.log('Error', response.message);
 			    }
-			})
-	}			
+			});
+	};
 }
 
 export function manualRegister(data) {	
 	
 	return dispatch => {
-		dispatch(beginRegister())
+		dispatch(beginRegister());
 
-		return makeUserRequest("post", data, "/register")	
+		return makeUserRequest('post', data, '/register')	
 			.then(response => {
 				if (response.data.success) {					
-					dispatch(registerSuccess())
-					dispatch(manualLogin(data, "/"))
-					history.push('/myprofile')
+					dispatch(registerSuccess());
+					dispatch(manualLogin(data, '/'));
+					history.push('/myprofile');
 				} else {					
-					dispatch(registerError())
-					let registerMessage = response.data.message
-					return registerMessage
+					dispatch(registerError());
+					let registerMessage = response.data.message;
+					return registerMessage;
 				}
 			})
 			.catch(response => {
@@ -133,7 +132,7 @@ export function manualRegister(data) {
 			      // Something happened in setting up the request that triggered an Error
 			      console.log('Error', response.message);
 			    }
-		    })
-	}
+			});
+	};
 
 }

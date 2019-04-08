@@ -1,6 +1,6 @@
 import React from "react"
 
-const Default = ({}) =>
+const Default = () =>
 	<div className="container-fluid">
 		<h2>Word Trainer Plus</h2>				
 		<p>Demonstration of PassportJS authentication in React w/ Redux. Use the links above to register a new user and login/logout. You will only be able to view the MyProfile page when you are logged in. Logging in will redirect you to MyProfile if you had clicked that link beforehand.</p>
@@ -16,7 +16,7 @@ const Default = ({}) =>
 			<li><strong>Webpack</strong> to bundle our client-side code</li>
 			<li>Hot reloading using <strong>webpack-dev-middleware</strong> and <strong>webpack-hot-middleware</strong></li>
 		</ul>
-		<p>Shoutout to GitHub member <b>choonkending</b> whose <a href="https://github.com/choonkending/react-webpack-node" target="_blank">repo</a> was a big help. Pull requests and comments / issue reports are most welcome!</p>						
+		<p>Shoutout to GitHub member <b>choonkending</b> whose <a href="https://github.com/choonkending/react-webpack-node" target="_blank" rel="noopener noreferrer">repo</a> was a big help. Pull requests and comments / issue reports are most welcome!</p>						
 	</div>
 
 export default Default

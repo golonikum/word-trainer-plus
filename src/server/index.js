@@ -51,7 +51,18 @@ app.post('/login', users.login);
 app.get('/logout', users.logout);
 app.post('/register', users.register);
 
-const respond = ({url}, res) => {
+const respond = (req, res) => {
+	let user = {};
+	if (req.isAuthenticated()) {
+		const u = req.user;
+		user = Object.assign({}, {
+			name: u.name,
+			role: u.role,
+			email: u.email,
+			isWaiting: false, 
+			authenticated: true,
+		});
+    }
 	const appHTML =`
 <!DOCTYPE html>
 <html lang=''>
@@ -64,6 +75,9 @@ const respond = ({url}, res) => {
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 		crossorigin="anonymous"
 	/>
+	<script>
+		window.__USER = ${JSON.stringify(user)};
+	</script>
 </head>
 <body>
 	<div id='app'></div>
@@ -74,7 +88,7 @@ const respond = ({url}, res) => {
     res.status(200).send(appHTML)
 }
 
-app.use(respond);
+app.use('/', respond);
 
 const port = app.get('port');
 
