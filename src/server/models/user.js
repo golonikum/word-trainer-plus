@@ -12,6 +12,7 @@ const UserSchema = new mongoose.Schema({
 	name: String,
 	password: String,
 	role: String,
+	languageId: mongoose.Types.ObjectId,
 });
 
 /**
@@ -47,5 +48,5 @@ UserSchema.pre("save", function(next) {
 */
 UserSchema.statics = {}
 
-export default mongoose.model("User", UserSchema)
+export default mongoose.model('User', UserSchema)
 

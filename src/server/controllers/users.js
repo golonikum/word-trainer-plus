@@ -1,21 +1,21 @@
-import mongoose from "mongoose"
-import passport from "passport"
-import User from "../models/user"
+import passport from 'passport'
+import User from '../models/user'
+import Language from '../models/language'
 
 // -------------------------------------------
 
 exports.login = function(req, res, next) {
-	// Do email and password validation for the server
-	passport.authenticate("local", function(err, user, info) {		
 
+	// Do email and password validation for the server
+	passport.authenticate('local', function(err, user, info) {
 		if(err) return next(err)
 		if(!user) {
 			return res.json({ success: false, message: info.message })			
 		}
 		// ***********************************************************************
-		// "Note that when using a custom callback, it becomes the application's
+		// 'Note that when using a custom callback, it becomes the application's
 		// responsibility to establish a session (by calling req.login()) and send
-		// a response."
+		// a response.'
 		// Source: http://passportjs.org/docs
 		// ***********************************************************************		
 		// Passport exposes a login() function on req (also aliased as logIn())
@@ -24,17 +24,20 @@ exports.login = function(req, res, next) {
 			if (loginErr) {
 				return res.json({ success: false, message: loginErr })
 			}
-			return res.json({ success: true, message: "authentication succeeded", name: user.name, role: user.role, email: user.email });
+			return res.json({ success: true, message: 'authentication succeeded', name: user.name, role: user.role, email: user.email });
 		})
 	})(req, res, next);
+
 }
 
 // -------------------------------------------
 
 exports.logout = function(req, res, next) {
+
 	// the logout method is added to the request object automatically by Passport
 	req.logout();
 	return res.json({ success: true })
+
 }
 
 // -------------------------------------------
@@ -44,21 +47,29 @@ exports.register = function(req, res, next) {
 	User.findOne({ email: req.body.email }, (err, user) => {
 		// is email address already in use?
 		if (user) {			
-			res.json({ success: false, message: "Email already in use" })
+			res.json({ success: false, message: 'Email already in use' })
 			return 
 		}
 		// go ahead and create the new user
 		else {
 			req.body.role = 'user';
-			User.create(req.body, (err) => {
+			Language.findOne({}, (err, language) => {
 				if (err) {
 					console.error(err)
-					res.json({ success: false })
+					res.json({ success: false, message: 'There is no languages in DB' })
 					return
 				}
-				res.json({ success: true })
-				return 
-			})
+				req.body.languageId = language._id;
+				User.create(req.body, (err) => {
+					if (err) {
+						console.error(err)
+						res.json({ success: false })
+						return
+					}
+					res.json({ success: true })
+					return 
+				});
+			});
 		}
 	})
 

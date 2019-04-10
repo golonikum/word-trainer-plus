@@ -8,7 +8,7 @@ import secrets from './config/secrets';
 import configurePassport from './config/passport';
 import configureExpress from './config/express';
 import configureDB from './config/init';
-import users from './controllers/users';
+import configureRoutes from './controllers';
 import './models/user';
 
 const app = express();
@@ -44,12 +44,9 @@ if (isDev) {
 configurePassport(app, passport);
 configureExpress(app, passport);
 configureDB();
+configureRoutes(app);
 
 // -------------------------------------------
-
-app.post('/login', users.login);
-app.get('/logout', users.logout);
-app.post('/register', users.register);
 
 const respond = (req, res) => {
 	let user = {};
