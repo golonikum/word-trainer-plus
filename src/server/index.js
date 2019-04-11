@@ -9,7 +9,7 @@ import configurePassport from './config/passport';
 import configureExpress from './config/express';
 import configureDB from './config/init';
 import configureRoutes from './controllers';
-import './models/user';
+import Language from  './models/language';
 
 const app = express();
 
@@ -48,17 +48,21 @@ configureRoutes(app);
 
 // -------------------------------------------
 
-const respond = (req, res) => {
+const respond = async(req, res) => {
 	let user = {};
+	let languages = [];
 	if (req.isAuthenticated()) {
 		const u = req.user;
+		const lang = await Language.findOne({ _id: u.languageId });
 		user = Object.assign({}, {
 			name: u.name,
 			role: u.role,
 			email: u.email,
 			isWaiting: false, 
 			authenticated: true,
+			language: lang,
 		});
+		languages = await Language.find({});
     }
 	const appHTML =`
 <!DOCTYPE html>
@@ -74,6 +78,7 @@ const respond = (req, res) => {
 	/>
 	<script>
 		window.__USER = ${JSON.stringify(user)};
+		window.__LANGUAGES = ${JSON.stringify(languages)};
 	</script>
 </head>
 <body>

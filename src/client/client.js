@@ -13,6 +13,7 @@ import Whoops404 from './components/Whoops404';
 
 const store = configureStore({
 	user: window.__USER,
+	languages: window.__LANGUAGES,
 });
 
 function PrivateRoute({ component: Component, authed, ...rest }) {

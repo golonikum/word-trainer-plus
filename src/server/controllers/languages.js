@@ -1,14 +1,27 @@
 import { Router } from 'express'
+import Language from '../models/language'
 
 const router = Router()
 
-router.get('/', (req, res) =>
-    res.status(200).json({ success: true, value: 'all languages' })
-)
+router.get('/', (req, res) => {
+    Language.find({}, (err, langs) => {
+        res.status(200).json({ success: true, value: langs })
+    });
+})
 
-router.post('/', (req, res) =>
+router.get('/:id', (req, res) => {
+    Language.findOne({ _id: req.params.id }, (err, lang) => {
+        if (!lang) {
+            res.status(404).send('Not found');
+        } else {
+            res.status(200).json({ success: true, value: lang });
+        }
+    });
+})
+
+router.post('/', (req, res) => {
     res.status(200).json({ success: true, value: 'add new language' })
-)
+})
 
 router.put('/:id', (req, res) =>
     // dispatchAndRespond(req, res, {

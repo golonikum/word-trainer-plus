@@ -4,7 +4,7 @@ import { history } from '../configureStore';
 
 // 'Log In' action creators
 function beginLogin() {
-	return { type: types.MANUAL_LOGIN_USER };
+	return { type: types.LOGIN_USER };
 }
 
 function loginSuccess(data) {
@@ -44,6 +44,19 @@ function registerError() {
 	return { type: types.REGISTER_ERROR_USER };
 }
 
+// 'Change language' action creators
+function beginChangeLang() {
+	return { type: types.CHANGE_USER_LANG };
+}
+
+function changeLangSuccess(data) {
+	return { type: types.CHANGE_USER_LANG_SUCCESS, data };
+}
+
+function changeLangError(message) {
+	return { type: types.CHANGE_USER_LANG_ERROR, message: message };
+}
+
 function makeUserRequest(method, data, api='/login') {
 	// returns a Promise
 	return axios({
@@ -62,7 +75,7 @@ export function manualLogin(
 	return dispatch => {
 		dispatch(beginLogin());
 
-		return makeUserRequest('post', data, '/login')	
+		return makeUserRequest('post', data, '/api/login')	
 			.then(response => {
 				if (response.data.success) {					
 					dispatch(loginSuccess(response.data));
@@ -90,7 +103,7 @@ export function manualLogout() {
 	return dispatch => {
 		dispatch(beginLogout());
 
-		return axios.get('/logout')
+		return axios.get('/api/logout')
 			.then(response => {
 				if (response.data.success) {
 					dispatch(logoutSuccess());
@@ -115,7 +128,7 @@ export function manualRegister(data) {
 	return dispatch => {
 		dispatch(beginRegister());
 
-		return makeUserRequest('post', data, '/register')	
+		return makeUserRequest('post', data, '/api/register')	
 			.then(response => {
 				if (response.data.success) {					
 					dispatch(registerSuccess());
@@ -125,6 +138,34 @@ export function manualRegister(data) {
 					dispatch(registerError());
 					let registerMessage = response.data.message;
 					return registerMessage;
+				}
+			})
+			.catch(response => {
+			    if (response instanceof Error) {
+			      // Something happened in setting up the request that triggered an Error
+			      console.log('Error', response.message);
+			    }
+			});
+	};
+
+}
+
+export function onChangeLang(e) {	
+	
+	return dispatch => {
+		dispatch(beginChangeLang());
+
+		const data = e.target.dataset;
+		return makeUserRequest('post', {
+			email: data.email,
+			languageId: data.id,
+		}, '/api/language')	
+			.then(response => {
+				if (response.data.success) {					
+					dispatch(changeLangSuccess(response.data));
+				} else {					
+					dispatch(changeLangError(response.data.message));
+					return response.data.message;
 				}
 			})
 			.catch(response => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap';
+import SelectLanguageContainer from '../container/SelectLanguageContainer';
 
 const Navigation = ({ user, manualLogout }) =>
 	<Navbar bg="light" expand="lg">
@@ -15,16 +16,23 @@ const Navigation = ({ user, manualLogout }) =>
 						{
 							!user.authenticated 
 							? <LinkContainer to="/register"><Nav.Link>Register</Nav.Link></LinkContainer>
-							: <LinkContainer to="/myprofile"><Nav.Link>MyProfile</Nav.Link></LinkContainer>
+							: <LinkContainer to="/myprofile"><Nav.Link>{ user.name || user.email }</Nav.Link></LinkContainer>
 						}
 					</div>
 					<div className="col-auto">
 						{
 							user.authenticated 
-							? <Button variant="primary" onClick={(e) => {
+							? <SelectLanguageContainer/>
+							: ''
+						}
+					</div>
+					<div className="col-auto">
+						{
+							user.authenticated 
+							? <Button variant="success" onClick={(e) => {
 								e.preventDefault()
 								manualLogout()
-							}}>Logout [{user.name || user.email}]</Button>
+							}}>Logout</Button>
 							: <LinkContainer to="/login"><Nav.Link>Log In</Nav.Link></LinkContainer>
 						}
 					</div>

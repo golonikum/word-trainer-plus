@@ -74,3 +74,35 @@ exports.register = function(req, res, next) {
 	})
 
 }
+
+exports.language =  function(req, res, next) {
+	
+	User.findOne({ email: req.body.email }, (err, user) => {
+		// is email address already in use?
+		if (!user) {			
+			res.json({ success: false, message: 'No such user' })
+			return 
+		}
+		// go ahead and create the new user
+		else {
+			Language.findOne({ _id: req.body.languageId }, (err, language) => {
+				if (!language) {
+					console.error(err)
+					res.json({ success: false, message: 'There is no such language in DB' })
+					return
+				}
+				user.languageId = language._id;
+				user.save((err) => {
+					if (err) {
+						console.error(err)
+						res.json({ success: false })
+						return
+					}
+					res.json({ success: true, language, })
+					return 
+				})
+			});
+		}
+	})
+
+}

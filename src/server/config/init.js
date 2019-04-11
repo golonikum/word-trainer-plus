@@ -10,8 +10,8 @@ export default function() {
     DEFAULT_LANGUAGES.forEach((lang) => {
         Language.findOne({ name: lang }, (err, language) => {
             if (!language) {
-                User.create({
-                    name: 'lang',
+                Language.create({
+                    name: lang,
                 }, (err) => {
                     if (err) {
                         console.error(err);
