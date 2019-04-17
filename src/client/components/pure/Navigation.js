@@ -15,7 +15,7 @@ const Navigation = ({ user, manualLogout }) =>
 					<div className="col-auto">
 						{
 							user.authenticated 
-							? <img src={user.gravatar} alt="Gravatar Icon"/>
+							? <img src={user.avatar} alt="Avatar" style={{ borderRadius: '50%' }}/>
 							: ''
 						}
 					</div>

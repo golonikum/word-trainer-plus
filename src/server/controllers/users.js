@@ -10,7 +10,7 @@ exports.getUserState = async(user) => {
 		role: user.role,
 		email: user.email,
 		language: lang,
-		gravatar: gravatar.url(user.email, {s: 40, d: 'retro'}),
+		avatar: gravatar.url(user.email, {s: 40, d: 'retro'}),
 	};
 };
 
