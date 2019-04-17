@@ -50,7 +50,7 @@ configureRoutes(app);
 
 const respond = async(req, res) => {
 	let user = {};
-	let languages = [];
+	let languages = await Language.find({});
 	if (req.isAuthenticated()) {
 		const u = req.user;
 		const lang = await Language.findOne({ _id: u.languageId });
@@ -62,7 +62,6 @@ const respond = async(req, res) => {
 			authenticated: true,
 			language: lang,
 		});
-		languages = await Language.find({});
     }
 	const appHTML =`
 <!DOCTYPE html>

@@ -20,11 +20,14 @@ exports.login = function(req, res, next) {
 		// ***********************************************************************		
 		// Passport exposes a login() function on req (also aliased as logIn())
 		// that can be used to establish a login session		
-		req.logIn(user, loginErr => {
+		req.logIn(user, async(loginErr) => {
 			if (loginErr) {
 				return res.json({ success: false, message: loginErr })
 			}
-			return res.json({ success: true, message: 'authentication succeeded', name: user.name, role: user.role, email: user.email });
+			const lang = await Language.findOne({ _id: user.languageId });
+			return res.json({ 
+				success: true, 
+				message: 'authentication succeeded', name: user.name, role: user.role, email: user.email, language: lang });
 		})
 	})(req, res, next);
 
