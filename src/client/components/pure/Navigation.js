@@ -14,6 +14,13 @@ const Navigation = ({ user, manualLogout }) =>
 					</div>
 					<div className="col-auto">
 						{
+							user.authenticated 
+							? <img src={user.gravatar} alt="Gravatar Icon"/>
+							: ''
+						}
+					</div>
+					<div className="col-auto">
+						{
 							!user.authenticated 
 							? <LinkContainer to="/register"><Nav.Link>Register</Nav.Link></LinkContainer>
 							: <LinkContainer to="/myprofile"><Nav.Link>{ user.name || user.email }</Nav.Link></LinkContainer>

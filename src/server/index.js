@@ -10,6 +10,7 @@ import configureExpress from './config/express';
 import configureDB from './config/init';
 import configureRoutes from './controllers';
 import Language from  './models/language';
+import { getUserState } from './controllers/users';
 
 const app = express();
 
@@ -53,14 +54,11 @@ const respond = async(req, res) => {
 	let languages = await Language.find({});
 	if (req.isAuthenticated()) {
 		const u = req.user;
-		const lang = await Language.findOne({ _id: u.languageId });
+		const state = await getUserState(u);
 		user = Object.assign({}, {
-			name: u.name,
-			role: u.role,
-			email: u.email,
 			isWaiting: false, 
 			authenticated: true,
-			language: lang,
+			...state
 		});
     }
 	const appHTML =`

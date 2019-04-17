@@ -1,6 +1,18 @@
-import passport from 'passport'
-import User from '../models/user'
-import Language from '../models/language'
+import passport from 'passport';
+import User from '../models/user';
+import Language from '../models/language';
+import gravatar from 'gravatar';
+
+exports.getUserState = async(user) => {
+	const lang = await Language.findOne({ _id: user.languageId });
+	return { 
+		name: user.name,
+		role: user.role,
+		email: user.email,
+		language: lang,
+		gravatar: gravatar.url(user.email, {s: 40, d: 'retro'}),
+	};
+};
 
 // -------------------------------------------
 
@@ -24,10 +36,13 @@ exports.login = function(req, res, next) {
 			if (loginErr) {
 				return res.json({ success: false, message: loginErr })
 			}
-			const lang = await Language.findOne({ _id: user.languageId });
+			// const lang = await Language.findOne({ _id: user.languageId });
+			const state = await exports.getUserState(user);
 			return res.json({ 
 				success: true, 
-				message: 'authentication succeeded', name: user.name, role: user.role, email: user.email, language: lang });
+				message: 'authentication succeeded',
+				...state
+			});
 		})
 	})(req, res, next);
 
