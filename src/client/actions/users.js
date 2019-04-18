@@ -150,12 +150,11 @@ export function manualRegister(data) {
 
 }
 
-export function onChangeLang(e) {	
+export function onChangeLang(data) {	
 	
 	return dispatch => {
 		dispatch(beginChangeLang());
 
-		const data = e.target.dataset;
 		return makeUserRequest('post', {
 			email: data.email,
 			languageId: data.id,

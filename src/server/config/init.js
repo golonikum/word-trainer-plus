@@ -2,21 +2,21 @@ import User from '../models/user';
 import Language from '../models/language';
 
 export const DEFAULT_LANGUAGES = [
-    'English',
-    'Italian',
+    { name: 'English', code: 'gb' },
+    { name: 'Italian', code: 'it' },
 ];
 
 export default function() {
     DEFAULT_LANGUAGES.forEach((lang) => {
-        Language.findOne({ name: lang }, (err, language) => {
+        Language.findOne({ name: lang.name }, (err, language) => {
             if (!language) {
                 Language.create({
-                    name: lang,
+                    ...lang
                 }, (err) => {
                     if (err) {
                         console.error(err);
                     } else {
-                        console.log(`Language "${lang}" successfully created in MongoDB.`);
+                        console.log(`Language "${lang.name}" successfully created in MongoDB.`);
                     }
                 });
             }

@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const LanguageSchema = new mongoose.Schema({
 	name: String,
+	code: String
 });
 
 /*
