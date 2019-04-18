@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Button, Image } from 'react-bootstrap';
 import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap';
 import SelectLanguageContainer from '../container/SelectLanguageContainer';
 
@@ -15,7 +15,7 @@ const Navigation = ({ user, manualLogout }) =>
 					<div className="col-auto">
 						{
 							user.authenticated 
-							? <img src={user.avatar} alt="Avatar" style={{ borderRadius: '50%' }}/>
+							? <Image src={user.avatar} alt="Avatar" rounded/>
 							: ''
 						}
 					</div>
