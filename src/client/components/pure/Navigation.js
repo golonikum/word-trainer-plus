@@ -23,7 +23,7 @@ const Navigation = ({ user, manualLogout }) =>
 					}}>Logout</Nav.Link>
 				</Dropdown.Menu>
 			</Dropdown>
-			: ''
+			: <Navbar.Brand>Word Trainer Plus</Navbar.Brand>
 		}
 		<Navbar.Toggle aria-controls="basic-navbar-nav" />
 		<Navbar.Collapse id="basic-navbar-nav">
