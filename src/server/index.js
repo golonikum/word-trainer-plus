@@ -63,9 +63,10 @@ const respond = async(req, res) => {
     }
 	const appHTML =`
 <!DOCTYPE html>
-<html lang=''>
+<html lang="">
 <head>
-	<meta http-equiv='Content-Type' content='text/html;charset=utf-8' />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Word Trainer Plus</title>
 	<link
 		rel="stylesheet"
@@ -80,8 +81,8 @@ const respond = async(req, res) => {
 	</script>
 </head>
 <body>
-	<div id='app'></div>
-	<script src='/bundle.js'></script>
+	<div id="app"></div>
+	<script src="/bundle.js"></script>
 </body>
 </html>
 `;

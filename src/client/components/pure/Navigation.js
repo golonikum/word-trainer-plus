@@ -4,7 +4,7 @@ import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap';
 import SelectLanguageContainer from '../container/SelectLanguageContainer';
 
 const Navigation = ({ user, manualLogout }) =>
-	<Navbar bg="light" expand="lg">
+	<Navbar bg="light" expand="md">
 		<Navbar.Toggle aria-controls="basic-navbar-nav" />
 		<Navbar.Collapse id="basic-navbar-nav">
 			<div className="container-fluid">
