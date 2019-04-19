@@ -17,4 +17,7 @@ export const ADD_LANG = 'ADD_LANG';
 export const UPDATE_LANG = 'UPDATE_LANG';
 export const DELETE_LANG = 'DELETE_LANG';
 
+export const STYLE = {
+    RESPONSIVE_FORM: 'container-fluid col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4',
+};
 

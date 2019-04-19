@@ -132,8 +132,7 @@ export function manualRegister(data) {
 			.then(response => {
 				if (response.data.success) {					
 					dispatch(registerSuccess());
-					dispatch(manualLogin(data, '/'));
-					history.push('/myprofile');
+					dispatch(manualLogin(data, '/myprofile'));
 				} else {					
 					dispatch(registerError());
 					let registerMessage = response.data.message;
