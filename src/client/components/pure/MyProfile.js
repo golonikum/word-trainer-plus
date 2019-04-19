@@ -1,14 +1,21 @@
-import React from "react"
+import React from 'react';
 import { Image } from 'react-bootstrap';
+import { STYLE } from '../../constants';
 
 const MyProfile = ({ user }) =>
-	<div className="container-fluid">
-		<h2>My Profile</h2>
+	<div className={STYLE.RESPONSIVE_PAGE}>
+		<h2>Настройки</h2>
 		<Image src={user.avatar} alt="Avatar" rounded/>
-		<p>Hi, {user.name}!</p>
-		<p>Your email is {user.email}!</p>
-		<p>You are {user.role === 'admin' ? 'an administrator' : 'a simple user'}.</p>
-		<p>You're seeing this page because you logged in successfully! Try logging out, clicking the MyProfile link and then completing the login. You wil notice that it redirects you to MyProfile page :)</p>
+		{
+			user.name || user.email
+			? <p>Привет, {user.name || user.email}{user.name ? ` (${user.email})` : ''}!</p>
+			: ''
+		}
+		{
+			user.role === 'admin'
+			? <p>Вы - <b>Администратор</b>.</p>
+			: ''
+		}
 	</div>
 
 export default MyProfile

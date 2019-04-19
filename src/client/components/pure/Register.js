@@ -13,7 +13,7 @@ const schema = yup.object({
 // ----------------------------------------------------
 const Register = ({ manualRegister }) => (
 	<div className={STYLE.RESPONSIVE_FORM}>
-		<h1>Registration</h1>
+		<h2>Регистрация</h2>
 		<Formik
 			validationSchema={schema}
 			initialValues={{ email: '', name: '', password: '' }}
@@ -39,7 +39,7 @@ const Register = ({ manualRegister }) => (
 			}) => (
 				<Form noValidate onSubmit={handleSubmit}>
 					<Form.Group>
-						<Form.Label>Email address</Form.Label>
+						<Form.Label>Адрес электронной почты</Form.Label>
 						<Form.Control
 							id="email"
 							ref="email"
@@ -53,12 +53,12 @@ const Register = ({ manualRegister }) => (
 						<Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
 					</Form.Group>
 					<Form.Group>
-						<Form.Label>Your name (optional)</Form.Label>
+						<Form.Label>Имя (не обязательное поле)</Form.Label>
 						<Form.Control
 							id="name"
 							ref="name"
 							type="text"
-							placeholder="Name"
+							placeholder="Имя"
 							onChange={handleChange}
 							onBlur={handleBlur}
 							value={values.name}
@@ -67,12 +67,12 @@ const Register = ({ manualRegister }) => (
 						<Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
 					</Form.Group>
 					<Form.Group>
-						<Form.Label>Password</Form.Label>
+						<Form.Label>Пароль</Form.Label>
 						<Form.Control
 							id="password"
 							ref="password"
 							type="password"
-							placeholder="Password"
+							placeholder="Пароль"
 							onChange={handleChange}
 							onBlur={handleBlur}
 							value={values.password}
@@ -80,7 +80,7 @@ const Register = ({ manualRegister }) => (
 						/>
 						<Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
 					</Form.Group>
-					<Button type="submit" disabled={isSubmitting}>Submit</Button>
+					<Button type="submit" disabled={isSubmitting}>Отправить</Button>
 				</Form>
 			)}
 		</Formik>

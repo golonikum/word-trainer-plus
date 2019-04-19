@@ -12,7 +12,7 @@ const schema = yup.object({
 // ----------------------------------------------------
 const Login = ({ manualLogin, nextPathname }) => (
 	<div className={STYLE.RESPONSIVE_FORM}>
-		<h1>Log in</h1>
+		<h2>Вход</h2>
 		<Formik
 			validationSchema={schema}
 			initialValues={{ email: '', password: '' }}
@@ -38,7 +38,7 @@ const Login = ({ manualLogin, nextPathname }) => (
 			}) => (
 				<Form noValidate onSubmit={handleSubmit}>
 					<Form.Group>
-						<Form.Label>Email address</Form.Label>
+						<Form.Label>Адрес электронной почты</Form.Label>
 						<Form.Control
 							id="email"
 							ref="email"
@@ -52,12 +52,12 @@ const Login = ({ manualLogin, nextPathname }) => (
 						<Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
 					</Form.Group>
 					<Form.Group>
-						<Form.Label>Password</Form.Label>
+						<Form.Label>Пароль</Form.Label>
 						<Form.Control
 							id="password"
 							ref="password"
 							type="password"
-							placeholder="Password"
+							placeholder="Пароль"
 							onChange={handleChange}
 							onBlur={handleBlur}
 							value={values.password}
@@ -65,7 +65,7 @@ const Login = ({ manualLogin, nextPathname }) => (
 						/>
 						<Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
 					</Form.Group>
-					<Button type="submit" disabled={isSubmitting}>Submit</Button>
+					<Button type="submit" disabled={isSubmitting}>Отправить</Button>
 				</Form>
 			)}
 		</Formik>
