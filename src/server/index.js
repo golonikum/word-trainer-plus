@@ -74,6 +74,7 @@ const respond = async(req, res) => {
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 		crossorigin="anonymous"
 	/>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="/bundle.css"/>
 	<script>
 		window.__USER = ${JSON.stringify(user)};

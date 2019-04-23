@@ -14,14 +14,14 @@ const Navigation = ({ user, manualLogout }) =>
                         marginRight: '8px'
 				}}>{user.name || user.email}</span>{ user.language ? <FlagIcon code={user.language.code} /> : '' }</Dropdown.Toggle>
 				<Dropdown.Menu>
-					<LinkContainer to="/myprofile"><Nav.Link>Настройки</Nav.Link></LinkContainer>
+					<LinkContainer to="/myprofile"><Nav.Link><i className="fa fa-user"></i> Настройки</Nav.Link></LinkContainer>
 					<Dropdown.Divider />
 					<SelectLanguageContainer/>
 					<Dropdown.Divider />
 					<Nav.Link onClick={(e) => {
 						e.preventDefault()
 						manualLogout()
-					}}>Выход</Nav.Link>
+					}}><i className="fa fa-sign-out"></i> Выход</Nav.Link>
 				</Dropdown.Menu>
 			</Dropdown>
 			: <Navbar.Brand>{PROJECT.TITLE}</Navbar.Brand>
@@ -32,18 +32,23 @@ const Navigation = ({ user, manualLogout }) =>
 				<Nav className="row">					
 					<div className="col-auto mr-auto"></div>
 					<div className="col-auto">
-						<IndexLinkContainer to="/"><Nav.Link>Главная</Nav.Link></IndexLinkContainer>
+						<IndexLinkContainer to="/"><Nav.Link><i className="fa fa-home"></i> Главная</Nav.Link></IndexLinkContainer>
 					</div>
 					{
 						!user.authenticated 
 						? <>
 							<div className="col-auto">
-								<LinkContainer to="/register"><Nav.Link>Регистрация</Nav.Link></LinkContainer>
+								<LinkContainer to="/register"><Nav.Link><i className="fa fa-registered"></i> Регистрация</Nav.Link></LinkContainer>
 							</div>	
 							<div className="col-auto">
-								<LinkContainer to="/login"><Nav.Link>Вход</Nav.Link></LinkContainer>
+								<LinkContainer to="/login"><Nav.Link><i className="fa fa-sign-in"></i> Вход</Nav.Link></LinkContainer>
 							</div>	
-						</> : ''
+						</> 
+						: <>
+							<div className="col-auto">
+								<LinkContainer to="/sources"><Nav.Link><i className="fa fa-database"></i> Источники</Nav.Link></LinkContainer>
+							</div>	
+						</>
 					}
 				</Nav>
 			</div>

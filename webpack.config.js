@@ -11,7 +11,7 @@ const LiveReloadPlugin = require('webpack-livereload-plugin');
 process.noDeprecation = true
 
 const config = {
-    entry: './src/client/client.js',
+    entry: ['babel-polyfill', './src/client/client.js'],
     output: {
         path: path.join(__dirname, 'public/assets'),
         filename: 'bundle.js',

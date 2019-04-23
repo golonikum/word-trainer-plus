@@ -1,5 +1,6 @@
 import users from './users';
 import languages from './languages';
+import sources from './sources';
 
 export default function (app) {
     app.post('/api/login', users.login);
@@ -8,5 +9,6 @@ export default function (app) {
     app.post('/api/language', users.language);
 
     app.use('/api/language', languages);
+    app.use('/api/source', sources);
 }
 
