@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import axios from 'axios';
 import { STYLE } from '../../constants';
 
@@ -9,7 +10,8 @@ const Sources = ({ user }) => {
     useEffect(() => {
         async function fetchData() {
             const result = await axios('/api/source');
-            setData(result.data);
+            debugger
+            setData(result.data.items);
         }
         fetchData();
     }, [user.language]);
@@ -17,7 +19,7 @@ const Sources = ({ user }) => {
     return (
         <div className={STYLE.RESPONSIVE_PAGE}>
             <h2>Источники</h2>
-            <Button variant="success"><i className="fa fa-plus"></i> Добавить</Button>
+            <LinkContainer to="/sources/add"><Nav.Link><i className="fa fa-plus"></i> Добавить</Nav.Link></LinkContainer>
             {
                 data.length
                 ? <ul>

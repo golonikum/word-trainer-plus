@@ -9,7 +9,7 @@ router.use($needAuth);
 router.get('/', (req, res) => {
     const user = req.user;
     Source.find({ userId: user._id, languageId: user.languageId }, (err, items) => {
-        res.status(200).json({ success: true, data: items })
+        res.status(200).json({ success: true, items })
     });
 })
 
@@ -18,44 +18,37 @@ router.get('/:id', (req, res) => {
         if (!item) {
             res.status(404).send('Not found');
         } else {
-            res.status(200).json({ success: true, data: item });
+            res.status(200).json({ success: true, item });
         }
     });
 })
 
 router.post('/', (req, res) => {
-    Source.findOne({ email: req.body.email }, (err, user) => {
-		// is email address already in use?
-		if (user) {			
-			res.json({ success: false, message: 'Email already in use' })
-			return 
+	const name = req.body.name;
+	const user = req.user;
+	if (!name) {
+		res.json({ success: false, message: 'Name can\'t be null' })
+		return;
+	}
+    Source.findOne({ name, userId: user._id, languageId: user.languageId }, (err, item) => {
+		// is name already in use?
+		if (item) {			
+			res.json({ success: false, message: 'Such name is already in use' })
+			return;
 		}
-		// go ahead and create the new user
+		// go ahead and create the new source
 		else {
-			req.body.role = 'user';
-			Source.findOne({}, (err, language) => {
+			Source.create({ name, userId: user._id, languageId: user.languageId }, (err, item) => {
 				if (err) {
 					console.error(err)
-					res.json({ success: false, message: 'There is no languages in DB' })
-					return
+					res.json({ success: false, message: 'Server error' });
+					return;
 				}
-				req.body.languageId = language._id;
-				Source.create(req.body, (err) => {
-					if (err) {
-						console.error(err)
-						res.json({ success: false })
-						return
-					}
-					res.json({ success: true })
-					return 
-				});
+				res.json({ success: true, id: item._id })
+				return;
 			});
 		}
-	})
-
-
-
-    res.status(200).json({ success: true, value: 'add new language' })
+	});
 })
 
 router.put('/:id', (req, res) =>

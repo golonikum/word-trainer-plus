@@ -9,7 +9,6 @@ const schema = yup.object({
 	password: yup.string().required(),
 });
 
-// ----------------------------------------------------
 const Login = ({ manualLogin, nextPathname }) => (
 	<div className={STYLE.RESPONSIVE_FORM}>
 		<h2>Вход</h2>

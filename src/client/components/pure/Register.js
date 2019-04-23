@@ -10,7 +10,6 @@ const schema = yup.object({
 	password: yup.string().required(),
 });
 
-// ----------------------------------------------------
 const Register = ({ manualRegister }) => (
 	<div className={STYLE.RESPONSIVE_FORM}>
 		<h2>Регистрация</h2>
