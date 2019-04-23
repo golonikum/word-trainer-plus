@@ -3,7 +3,7 @@ import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap';
 import SelectLanguageContainer from '../container/SelectLanguageContainer';
 import FlagIcon from './FlagIcon';
-import { PROJECT, STYLE } from '../../constants';
+import { PROJECT } from '../../constants';
 
 const Navigation = ({ user, manualLogout }) =>
 	<Navbar bg="light" expand="md">
@@ -12,7 +12,7 @@ const Navigation = ({ user, manualLogout }) =>
 			? <Dropdown>
 				<Dropdown.Toggle variant="outline-info"><span style={{
                         marginRight: '8px'
-                    }}>{user.name || user.email}</span><FlagIcon code={user.language.code} /></Dropdown.Toggle>
+				}}>{user.name || user.email}</span>{ user.language ? <FlagIcon code={user.language.code} /> : '' }</Dropdown.Toggle>
 				<Dropdown.Menu>
 					<LinkContainer to="/myprofile"><Nav.Link>Настройки</Nav.Link></LinkContainer>
 					<Dropdown.Divider />

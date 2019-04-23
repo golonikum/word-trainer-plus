@@ -16,17 +16,17 @@ const store = configureStore({
 	languages: window.__LANGUAGES,
 });
 
-function PrivateRoute({ component: Component, authed, ...rest }) {
+function ConditionalRoute({ component: Component, condition, redirectTo, ...rest }) {
   return (
     <Route
       {...rest}
       render={props =>
-        authed === true ? (
+        condition === true ? (
 					<Component {...props} />
         ) : (
           <Redirect
             to={{
-              pathname: '/login',
+              pathname: redirectTo,
               state: { from: props.location }
             }}
           />
@@ -45,9 +45,9 @@ render(
 						<Route component={NavigationContainer} />
 						<Switch>
 							<Route exact path='/' component={Default} />
-							<Route path='/login' component={LoginContainer} />
-							<Route path='/register' component={RegisterContainer} />
-							<PrivateRoute authed={store.getState().user.authenticated} path='/myprofile' component={MyProfileContainer} />
+							<ConditionalRoute condition={!store.getState().user.authenticated} path='/login' component={LoginContainer} redirectTo='/myprofile' />
+							<ConditionalRoute condition={!store.getState().user.authenticated} path='/register' component={RegisterContainer} redirectTo='/myprofile' />
+							<ConditionalRoute condition={store.getState().user.authenticated} path='/myprofile' component={MyProfileContainer} redirectTo='/login' />
 							<Route component={Whoops404} />
 						</Switch>
 					</div>
