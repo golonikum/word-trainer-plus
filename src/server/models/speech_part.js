@@ -17,4 +17,3 @@ SpeechPartSchema.methods = {}
 SpeechPartSchema.statics = {}
 
 export default mongoose.model('SpeechPart', SpeechPartSchema)
-
