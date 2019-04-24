@@ -89,12 +89,24 @@ router.put('/:id', (req, res) => {
 	});
 })
 
-router.delete('/:id', (req, res) =>
-    // dispatchAndRespond(req, res, {
-    //     type: C.REMOVE_COLOR,
-    //     id: req.params.id
-    // })
-    res.status(200).json({ success: true, value: 'delete the language' })
-)
+router.delete('/:id', (req, res) => {
+	const user = req.user;
+	const id = req.params.id;
+	Source.findOne({ _id: id, userId: user._id, languageId: user.languageId }, (err, item) => {
+		if (!item) {
+			res.json({ success: false, message: 'Not found' });
+		} else {
+			item.remove((err) => {
+				if (err) {
+					console.error(err)
+					res.json({ success: false, message: 'Server error' });
+					return;
+				}
+				res.json({ success: true });
+				return;
+			});
+		}
+	});
+})
 
 export default router

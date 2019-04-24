@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Alert, Spinner } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { STYLE } from '../../constants';
 import axios from 'axios';
 import { history } from '../../configureStore';
+import LoadingIndicator from './LoadingIndicator';
 
 const schema = yup.object({
 	name: yup.string().required(),
@@ -39,7 +40,7 @@ const AddEditSource = ({ user, match }) => {
 										name: data.message,
 									});
 								} else {
-									history.push(`/sources/${data.id}`);
+									history.push(`/source/${data.id}`);
 								}
 							})
 							.catch((error) => {
@@ -75,7 +76,7 @@ const AddEditSource = ({ user, match }) => {
 						</Form>
 					)}
 				</Formik>
-				: (data && data.message ? <Alert variant="danger">{data.message}</Alert> : <Spinner animation="border" variant="primary" role="status"><span className="sr-only">Loading...</span></Spinner>)
+				: <LoadingIndicator data={data} />
 			}
 		</div>
 	);

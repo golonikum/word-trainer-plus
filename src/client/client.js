@@ -16,6 +16,7 @@ import NavigationContainer from './components/container/NavigationContainer';
 import Sources from './components/pure/Sources';
 import AddEditSource from './components/pure/AddEditSource';
 import ViewSource from './components/pure/ViewSource';
+import RemoveSource from './components/pure/RemoveSource';
 
 const store = configureStore({
 	user: window.__USER,
@@ -58,10 +59,13 @@ render(
 							<NotAuthedRoute path='/login' component={LoginContainer} />
 							<NotAuthedRoute path='/register' component={RegisterContainer} />
 							<AuthedRoute path='/myprofile' component={MyProfileContainer} />
-							<AuthedRoute exact path='/sources' component={ConnectUser(Sources)} />
-							<AuthedRoute exact path='/sources/set' component={ConnectUser(AddEditSource)} />
-							<AuthedRoute path='/sources/set/:id' component={ConnectUser(AddEditSource)} />
-							<AuthedRoute path='/sources/:id' component={ConnectUser(ViewSource)} />
+
+							<AuthedRoute exact path='/source' component={ConnectUser(Sources)} />
+							<AuthedRoute exact path='/source/set' component={ConnectUser(AddEditSource)} />
+							<AuthedRoute path='/source/set/:id' component={ConnectUser(AddEditSource)} />
+							<AuthedRoute path='/source/remove/:id' component={ConnectUser(RemoveSource)} />
+							<AuthedRoute path='/source/:id' component={ConnectUser(ViewSource)} />
+							
 							<Route component={Whoops404} />
 						</Switch>
 					</div>

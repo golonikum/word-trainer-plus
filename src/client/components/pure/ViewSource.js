@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Nav, Spinner, Alert } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import axios from 'axios';
 import { STYLE } from '../../constants';
+import LoadingIndicator from './LoadingIndicator';
 
 const ViewSource = ({ user, match }) => {
     const [data, setData] = useState(null);
@@ -21,10 +22,11 @@ const ViewSource = ({ user, match }) => {
             {
                 data && data.success
                 ? <>
-                    <LinkContainer to={`/sources/set/${data.item._id}`}><Nav.Link><i className="fa fa-edit"></i> Изменить</Nav.Link></LinkContainer>
+                    <LinkContainer to={`/source/set/${data.item._id}`}><Nav.Link><i className="fa fa-edit"></i> Изменить</Nav.Link></LinkContainer>
+                    <LinkContainer to={`/source/remove/${data.item._id}`}><Nav.Link><i className="fa fa-trash"></i> Удалить</Nav.Link></LinkContainer>
                     <div>{data.item.name}</div>
                 </>
-                : (data && data.message ? <Alert variant="danger">{data.message}</Alert> : <Spinner animation="border" variant="primary" role="status"><span className="sr-only">Loading...</span></Spinner>)
+                : <LoadingIndicator data={data} />
             }
         </div>
     );	

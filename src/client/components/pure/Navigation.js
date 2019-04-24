@@ -48,7 +48,7 @@ const Navigation = ({ user, manualLogout }) =>
 						</> 
 						: <>
 							<div className="col-auto">
-								<LinkContainer to="/sources"><Nav.Link><i className="fa fa-database"></i> Источники</Nav.Link></LinkContainer>
+								<LinkContainer to="/source"><Nav.Link><i className="fa fa-database"></i> Источники</Nav.Link></LinkContainer>
 							</div>	
 						</>
 					}

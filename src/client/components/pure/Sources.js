@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Nav, Spinner } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import axios from 'axios';
 import { STYLE } from '../../constants';
+import LoadingIndicator from './LoadingIndicator';
 
 const Sources = ({ user }) => {
     const [data, setData] = useState(null);
@@ -10,7 +11,7 @@ const Sources = ({ user }) => {
     useEffect(() => {
         async function fetchData() {
             const result = await axios('/api/source');
-            setData(result.data.items);
+            setData(result.data);
         }
         fetchData();
     }, [user.language]);
@@ -18,15 +19,21 @@ const Sources = ({ user }) => {
     return (
         <div className={STYLE.RESPONSIVE_PAGE}>
             <h2>Источники</h2>
-            <LinkContainer to="/sources/set"><Nav.Link><i className="fa fa-plus"></i> Добавить</Nav.Link></LinkContainer>
+            <LinkContainer to="/source/set"><Nav.Link><i className="fa fa-plus"></i> Добавить</Nav.Link></LinkContainer>
             {
-                data && data.length
-                ? <ul>
-                    {data.map(item => (
-                        <li key={item._id}><LinkContainer to={`/sources/${item._id}`}><Nav.Link>{item.name}</Nav.Link></LinkContainer></li>
-                    ))}
-                </ul>
-                : (!data ? <Spinner animation="border" variant="primary" role="status"><span className="sr-only">Loading...</span></Spinner> : <p>Ничего нет, пока</p>)
+                data && data.success
+                ? <>
+                    {
+                        data.items && data.items.length
+                        ? <ul>
+                            {data.items.map(item => (
+                                <li key={item._id}><LinkContainer to={`/source/${item._id}`}><Nav.Link>{item.name}</Nav.Link></LinkContainer></li>
+                            ))}
+                        </ul>
+                        : <p>Ничего нет, пока</p>
+                    }
+                </>
+                : <LoadingIndicator data={data} />
             }
             
         </div>
