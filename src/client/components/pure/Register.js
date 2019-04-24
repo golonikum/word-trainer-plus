@@ -79,7 +79,7 @@ const Register = ({ manualRegister }) => (
 						/>
 						<Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
 					</Form.Group>
-					<Button type="submit" disabled={isSubmitting}>Отправить</Button>
+					<Button type="submit" disabled={isSubmitting}>Регистрация</Button>
 				</Form>
 			)}
 		</Formik>

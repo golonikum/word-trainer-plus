@@ -6,7 +6,9 @@ import FlagIcon from './FlagIcon';
 import { PROJECT } from '../../constants';
 
 const Navigation = ({ user, manualLogout }) =>
-	<Navbar bg="light" expand="md">
+	<Navbar bg="light" expand="md" style={{
+		marginBottom: '8px',
+	}}>
 		{
 			user.authenticated 
 			? <Dropdown>
@@ -38,7 +40,7 @@ const Navigation = ({ user, manualLogout }) =>
 						!user.authenticated 
 						? <>
 							<div className="col-auto">
-								<LinkContainer to="/register"><Nav.Link><i className="fa fa-registered"></i> Регистрация</Nav.Link></LinkContainer>
+								<LinkContainer to="/register"><Nav.Link><i className="fa fa-user-plus"></i> Регистрация</Nav.Link></LinkContainer>
 							</div>	
 							<div className="col-auto">
 								<LinkContainer to="/login"><Nav.Link><i className="fa fa-sign-in"></i> Вход</Nav.Link></LinkContainer>

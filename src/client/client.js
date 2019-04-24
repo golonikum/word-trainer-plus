@@ -14,7 +14,8 @@ import MyProfileContainer from './components/container/MyProfileContainer';
 import Default from './components/pure/Default';
 import NavigationContainer from './components/container/NavigationContainer';
 import Sources from './components/pure/Sources';
-import AddSource from './components/pure/AddSource';
+import AddEditSource from './components/pure/AddEditSource';
+import ViewSource from './components/pure/ViewSource';
 
 const store = configureStore({
 	user: window.__USER,
@@ -58,7 +59,9 @@ render(
 							<NotAuthedRoute path='/register' component={RegisterContainer} />
 							<AuthedRoute path='/myprofile' component={MyProfileContainer} />
 							<AuthedRoute exact path='/sources' component={ConnectUser(Sources)} />
-							<AuthedRoute path='/sources/add' component={ConnectUser(AddSource)} />
+							<AuthedRoute exact path='/sources/set' component={ConnectUser(AddEditSource)} />
+							<AuthedRoute path='/sources/set/:id' component={ConnectUser(AddEditSource)} />
+							<AuthedRoute path='/sources/:id' component={ConnectUser(ViewSource)} />
 							<Route component={Whoops404} />
 						</Switch>
 					</div>
