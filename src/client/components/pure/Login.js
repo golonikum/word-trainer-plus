@@ -10,7 +10,7 @@ const schema = yup.object({
 });
 
 const Login = ({ manualLogin, nextPathname }) => (
-	<div className={STYLE.RESPONSIVE_FORM}>
+	<div className={STYLE.RESPONSIVE_PAGE}>
 		<h2>Вход</h2>
 		<Formik
 			validationSchema={schema}

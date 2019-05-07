@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Nav } from 'react-bootstrap';
+import { Nav, Badge } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import axios from 'axios';
 import { STYLE } from '../../constants';
@@ -18,18 +18,18 @@ const Sources = ({ user }) => {
 
     return (
         <div className={STYLE.RESPONSIVE_PAGE}>
-            <h2>Источники</h2>
+            <h2>Источники <Badge variant="secondary">{data && data.success && data.items.length}</Badge></h2>
             <LinkContainer to="/source/set"><Nav.Link><i className="fa fa-plus"></i> Добавить</Nav.Link></LinkContainer>
             {
                 data && data.success
                 ? <>
                     {
                         data.items && data.items.length
-                        ? <ul>
+                        ? <ol>
                             {data.items.map(item => (
-                                <li key={item._id}><LinkContainer to={`/source/${item._id}`}><Nav.Link>{item.name}</Nav.Link></LinkContainer></li>
+                                <li key={item._id}><LinkContainer to={`/source/${item._id}`}><Nav.Link>{item.name} <Badge variant="secondary">0</Badge></Nav.Link></LinkContainer></li>
                             ))}
-                        </ul>
+                        </ol>
                         : <p>Ничего нет, пока</p>
                     }
                 </>

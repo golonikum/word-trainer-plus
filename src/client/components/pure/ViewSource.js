@@ -18,13 +18,12 @@ const ViewSource = ({ user, match }) => {
 
     return (
         <div className={STYLE.RESPONSIVE_PAGE}>
-            <h2>Источник</h2>
+            <h2>{data && data.success && data.item.name}</h2>
             {
                 data && data.success
                 ? <>
                     <LinkContainer to={`/source/set/${data.item._id}`}><Nav.Link><i className="fa fa-edit"></i> Изменить</Nav.Link></LinkContainer>
                     <LinkContainer to={`/source/remove/${data.item._id}`}><Nav.Link><i className="fa fa-trash"></i> Удалить</Nav.Link></LinkContainer>
-                    <div>{data.item.name}</div>
                 </>
                 : <LoadingIndicator data={data} />
             }

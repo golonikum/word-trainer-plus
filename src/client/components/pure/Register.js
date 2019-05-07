@@ -11,7 +11,7 @@ const schema = yup.object({
 });
 
 const Register = ({ manualRegister }) => (
-	<div className={STYLE.RESPONSIVE_FORM}>
+	<div className={STYLE.RESPONSIVE_PAGE}>
 		<h2>Регистрация</h2>
 		<Formik
 			validationSchema={schema}

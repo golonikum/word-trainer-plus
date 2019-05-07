@@ -24,7 +24,7 @@ const AddEditSource = ({ user, match }) => {
 	}, [user.language]);
 	
 	return (
-		<div className={STYLE.RESPONSIVE_FORM}>
+		<div className={STYLE.RESPONSIVE_PAGE}>
 			<h2>{id ? 'Изменить' : 'Новый'} источник</h2>
 			{
 				!id || (data && data.success)

@@ -19,7 +19,7 @@ const RemoveSource = ({ user, match }) => {
 	}, [user.language]);
 	
 	return (
-		<div className={STYLE.RESPONSIVE_FORM}>
+		<div className={STYLE.RESPONSIVE_PAGE}>
 			<h2>Удаление источника</h2>
 			{
 				data && data.success
