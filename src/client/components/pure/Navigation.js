@@ -53,6 +53,18 @@ const Navigation = ({ user, manualLogout }) =>
 							<div className="col-auto">
 								<LinkContainer to="/tag"><Nav.Link><i className="fa fa-tag"></i> Тэги</Nav.Link></LinkContainer>
 							</div>	
+							<div className="col-auto">
+								<LinkContainer to="/word"><Nav.Link><i className="fa fa-sticky-note"></i> Слова</Nav.Link></LinkContainer>
+							</div>	
+							<div className="col-auto">
+								<LinkContainer to="/context"><Nav.Link><i className="fa fa-book"></i> Контекст</Nav.Link></LinkContainer>
+							</div>	
+							<div className="col-auto">
+								<LinkContainer to="/exercise"><Nav.Link><i className="fa fa-play"></i> Упражнения</Nav.Link></LinkContainer>
+							</div>	
+							<div className="col-auto">
+								<LinkContainer to="/search"><Nav.Link><i className="fa fa-search"></i> Поиск</Nav.Link></LinkContainer>
+							</div>	
 						</>
 					}
 				</Nav>
