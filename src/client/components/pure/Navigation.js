@@ -50,6 +50,9 @@ const Navigation = ({ user, manualLogout }) =>
 							<div className="col-auto">
 								<LinkContainer to="/source"><Nav.Link><i className="fa fa-database"></i> Источники</Nav.Link></LinkContainer>
 							</div>	
+							<div className="col-auto">
+								<LinkContainer to="/tag"><Nav.Link><i className="fa fa-tag"></i> Тэги</Nav.Link></LinkContainer>
+							</div>	
 						</>
 					}
 				</Nav>

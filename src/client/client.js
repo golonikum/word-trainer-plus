@@ -12,6 +12,7 @@ import Default from './components/pure/Default';
 
 import { LoginContainer, RegisterContainer, MyProfileContainer, NavigationContainer } from './components/container';
 import { Sources, AddEditSource, ViewSource, RemoveSource } from './components/pure/sources';
+import { Tags, AddEditTag, ViewTag, RemoveTag } from './components/pure/tags';
 
 const store = configureStore({
 	user: window.__USER,
@@ -60,7 +61,13 @@ render(
 							<AuthedRoute path='/source/set/:id' component={ConnectUser(AddEditSource)} />
 							<AuthedRoute path='/source/remove/:id' component={ConnectUser(RemoveSource)} />
 							<AuthedRoute path='/source/:id' component={ConnectUser(ViewSource)} />
-							
+
+							<AuthedRoute exact path='/tag' component={ConnectUser(Tags)} />
+							<AuthedRoute exact path='/tag/set' component={ConnectUser(AddEditTag)} />
+							<AuthedRoute path='/tag/set/:id' component={ConnectUser(AddEditTag)} />
+							<AuthedRoute path='/tag/remove/:id' component={ConnectUser(RemoveTag)} />
+							<AuthedRoute path='/tag/:id' component={ConnectUser(ViewTag)} />
+
 							<Route component={Whoops404} />
 						</Switch>
 					</div>
