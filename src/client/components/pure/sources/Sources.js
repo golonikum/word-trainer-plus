@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Nav, Badge } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import axios from 'axios';
-import { STYLE } from '../../constants';
-import LoadingIndicator from './LoadingIndicator';
+import { STYLE } from '../../../constants';
+import LoadingIndicator from '../LoadingIndicator';
 
 const Sources = ({ user }) => {
     const [data, setData] = useState(null);

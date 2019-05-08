@@ -8,15 +8,10 @@ import configureStore, { history } from './configureStore';
 
 import ConnectUser from './components/ConnectUser';
 import Whoops404 from './components/Whoops404';
-import LoginContainer from './components/container/LoginContainer';
-import RegisterContainer from './components/container/RegisterContainer';
-import MyProfileContainer from './components/container/MyProfileContainer';
 import Default from './components/pure/Default';
-import NavigationContainer from './components/container/NavigationContainer';
-import Sources from './components/pure/Sources';
-import AddEditSource from './components/pure/AddEditSource';
-import ViewSource from './components/pure/ViewSource';
-import RemoveSource from './components/pure/RemoveSource';
+
+import { LoginContainer, RegisterContainer, MyProfileContainer, NavigationContainer } from './components/container';
+import { Sources, AddEditSource, ViewSource, RemoveSource } from './components/pure/sources';
 
 const store = configureStore({
 	user: window.__USER,

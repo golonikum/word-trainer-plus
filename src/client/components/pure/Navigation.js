@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap';
-import SelectLanguageContainer from '../container/SelectLanguageContainer';
+import { SelectLanguageContainer } from '../container';
 import FlagIcon from './FlagIcon';
 import { PROJECT } from '../../constants';
 

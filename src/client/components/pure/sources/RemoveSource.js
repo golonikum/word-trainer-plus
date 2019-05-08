@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Formik } from 'formik';
-import { STYLE } from '../../constants';
+import { STYLE } from '../../../constants';
 import axios from 'axios';
-import { history } from '../../configureStore';
-import LoadingIndicator from './LoadingIndicator';
+import { history } from '../../../configureStore';
+import LoadingIndicator from '../LoadingIndicator';
 
 const RemoveSource = ({ user, match }) => {
 	const id = match.params.id;
