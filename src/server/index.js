@@ -76,7 +76,7 @@ const respond = async(req, res) => {
 	/>
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="/bundle.css"/>
-	<!--link rel="shortcut icon" href="/favicon.png"-->
+	<link rel="shortcut icon" href="resources/favicon.png">
 	<script>
 		window.__USER = ${JSON.stringify(user)};
 		window.__LANGUAGES = ${JSON.stringify(languages)};

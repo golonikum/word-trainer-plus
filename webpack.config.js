@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 process.noDeprecation = true
 
@@ -108,7 +109,11 @@ module.exports = (env, argv) => {
     }
 
     if (mode === 'production') {
-        
+        config.plugins.push(
+            new CopyPlugin([
+                { from: 'resources/', to: 'resources/', force: true },
+            ]),
+        );
     }
 
     config.mode = mode;
