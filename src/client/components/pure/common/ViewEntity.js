@@ -21,10 +21,14 @@ const ViewEntity = ({ user, match, entity }) => {
             <h2>{data && data.success && data.item.name}</h2>
             {
                 data && data.success
-                ? <>
-                    <LinkContainer to={`/${entity}/set/${data.item._id}`}><Nav.Link><i className="fa fa-edit"></i> Изменить</Nav.Link></LinkContainer>
-                    <LinkContainer to={`/${entity}/remove/${data.item._id}`}><Nav.Link><i className="fa fa-trash"></i> Удалить</Nav.Link></LinkContainer>
-                </>
+                ? <div className="row">
+                    <div className="col-auto">
+                        <LinkContainer to={`/${entity}/set/${data.item._id}`}><Nav.Link><i className="fa fa-edit"></i> Изменить</Nav.Link></LinkContainer>
+                    </div>	
+                    <div className="col-auto">
+                        <LinkContainer to={`/${entity}/remove/${data.item._id}`}><Nav.Link><i className="fa fa-trash"></i> Удалить</Nav.Link></LinkContainer>
+                    </div>
+                </div>
                 : <LoadingIndicator data={data} />
             }
         </div>
